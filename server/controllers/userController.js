@@ -78,10 +78,10 @@ exports.edit = (req, res) => {
 // Update User
 exports.update = (req, res) => {
   const {
-    first_name, last_name, email, phone_number, mobile_money_number, country,
+    first_name, last_name, email, phone_number, country,
   } = req.body;
   // User connection
-  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ? WHERE id = ?', [first_name, last_name, email, phone_number, mobile_money_number, country, req.params.id], (err, rows) => {
+  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, country = ? WHERE id = ?', [first_name, last_name, email, phone_number, country, req.params.id], (err, rows) => {
     if (!err) {
       // User the connection
       connection.query('SELECT * FROM user WHERE id = ?', [req.params.id], (err, rows) => {
@@ -105,7 +105,7 @@ exports.delete = (req, res) => {
   connection.query('UPDATE user SET status = ? WHERE id = ?', ['removed', req.params.id], (err, rows) => {
     if (!err) {
       const removedUser = encodeURIComponent('User successeflly removed.');
-      res.redirect(`/?removed=${removedUser}`);
+      res.redirect(`users/?removed=${removedUser}`);
     } else {
       console.log(err);
     }

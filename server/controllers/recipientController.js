@@ -16,8 +16,8 @@ exports.view = (req, res) => {
   // User the connection
   connection.query('SELECT * FROM recipients WHERE status = "active"', (err, rows) => {
     if (!err) {
-      // const removedRecipient = req.query.removed;
-      res.render('recipients', { rows });
+      const removedRecipient = req.query.removed;
+      res.render('recipients', { rows, removedRecipient });
     } else {
       console.log(err);
     }
@@ -25,12 +25,12 @@ exports.view = (req, res) => {
   });
 };
 
-// View Users
+// View recipient
 exports.viewall = (req, res) => {
   // User the connection
   connection.query('SELECT * FROM recipients WHERE id = ?', [req.params.id], (err, rows) => {
     if (!err) {
-      res.render('view-user', { rows });
+      res.render('view-recipient', { rows });
     } else {
       console.log(err);
     }
