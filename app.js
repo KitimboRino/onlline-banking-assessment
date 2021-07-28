@@ -19,11 +19,13 @@ app.use(express.json()); // New
 // Static Files
 app.use(express.static('public'));
 
-// Templating Engine
+// Handle bars templating Engine
 app.engine('hbs', exphbs( {extname: '.hbs' }));
 app.set('view engine', 'hbs');
 
+// Initial route
 const routes = require('./server/routes/user');
 app.use('/', routes);
 
+// Server Test
 app.listen(port, () => console.log(`Listening on port ${port}`));

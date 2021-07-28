@@ -14,21 +14,28 @@
   </div>
   <div class="row">
     <div class="col">
+
+      {{!-- Table --}}
       <table class="table">
         <thead>
           <tr>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Phone</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Mobile Money Number</th>
+            <th scope="col">Country</th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
             <th scope="row">{{this.first_name}}</th>
             <td>{{this.last_name}}</td>
             <td>{{this.email}}</td>
-            <td>{{this.phone}}</td>
+            <td>{{this.phone_number}}</td>
+            <td>{{this.mobile_money_number}}</td>
+            <td>{{this.country}}</td>
           </tr>
         </tbody>
       </table>
