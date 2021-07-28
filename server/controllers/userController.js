@@ -75,14 +75,14 @@ exports.edit = (req, res) => {
 // Update User
 exports.update = (req, res) => {
   const { first_name, last_name, email, phone_number, mobile_money_number, country } = req.body;
-  // User the connection
-  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number =?, country =?', [first_name, last_name, email, phone_number, mobile_money_number, country, req.params.id], (err, rows) => {
+  // User connection
+  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ? WHERE id = ?', [first_name, last_name, email, phone_number, mobile_money_number, country, req.params.id], (err, rows) => {
 
     if (!err) {
       // User the connection
       connection.query('SELECT * FROM user WHERE id = ?', [req.params.id], (err, rows) => {
-        // When done with the connection, release it
 
+        // When done with the connection, release it
         if (!err) {
           res.render('edit-user', { rows, alert: `${first_name} has been updated.` });
         } else {
@@ -97,6 +97,7 @@ exports.update = (req, res) => {
   });
 }
 
+
 // Delete User
 exports.delete = (req, res) => {
 
@@ -107,7 +108,7 @@ exports.delete = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from beer table are: \n', rows);
+    console.log('The data from user table are: \n', rows);
   });
 
 }
@@ -122,7 +123,7 @@ exports.viewall = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    console.log('The data from user table are: \n', rows);
   });
 
 }
