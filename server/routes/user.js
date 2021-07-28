@@ -2,10 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 const userController = require('../controllers/userController');
+// const bcrypt = require('bcrypt');
 
-// Routes to the various pages
-router.get('/', userController.view);
-router.post('/', userController.find);
+// Routes
+router.get('/users', userController.view);
+router.post('/users', userController.find);
 router.get('/adduser', userController.form);
 router.post('/adduser', userController.create);
 router.get('/edituser/:id', userController.edit);

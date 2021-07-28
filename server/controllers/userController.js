@@ -18,7 +18,7 @@ exports.view = (req, res) => {
     // When done with the connection, release it
     if (!err) {
       const removedUser = req.query.removed;
-      res.render('home', { rows, removedUser });
+      res.render('users', { rows, removedUser });
     } else {
       console.log(err);
     }
@@ -32,7 +32,7 @@ exports.find = (req, res) => {
   // User the connection
   connection.query('SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?', [`%${searchTerm}%`, `%${searchTerm}%`], (err, rows) => {
     if (!err) {
-      res.render('home', { rows });
+      res.render('users', { rows });
     } else {
       console.log(err);
     }
@@ -47,12 +47,12 @@ exports.form = (req, res) => {
 // Add new user
 exports.create = (req, res) => {
   const {
-    first_name, last_name, email, phone_number, mobile_money_number, country,
+    first_name, last_name, email, phone_number, country,
   } = req.body;
   // const searchTerm = req.body.search;
 
   // User the connection
-  connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ?', [first_name, last_name, email, phone_number, mobile_money_number, country], (err, rows) => {
+  connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, country = ?', [first_name, last_name, email, phone_number, country], (err, rows) => {
     if (!err) {
       res.render('add-user', { alert: 'User added successfully.' });
     } else {

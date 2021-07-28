@@ -17,11 +17,11 @@ exports.view = (req, res) => {
   connection.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
     if (!err) {
       const removedUser = req.query.removed;
-      res.render('home', { rows, removedUser });
+      res.render('recipients', { rows, removedUser });
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    console.log('The data from Recipient table: \n', rows);
   });
 };
 
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
   // Recipient's connection
   connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ?', [first_name, last_name, email, phone_number, mobile_money_number, country], (err, rows) => {
     if (!err) {
-      res.render('add-user', { alert: 'User added successfully.' });
+      res.render('add-recipient', { alert: 'Recipient added successfully.' });
     } else {
       console.log(err);
     }
