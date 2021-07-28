@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 const express = require('express');
 const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
+// const bodyParser = require('body-parser');
+// const mysql = require('mysql');
 
 require('dotenv').config();
 
@@ -10,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 // Parsing middleware
 // Parse application/x-www-form-urlencoded
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Parse application/json
 // app.use(bodyParser.json());
@@ -20,11 +21,12 @@ app.use(express.json()); // New
 app.use(express.static('public'));
 
 // Handle bars templating Engine
-app.engine('hbs', exphbs( {extname: '.hbs' }));
+app.engine('hbs', exphbs({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
 
 // Initial route
 const routes = require('./server/routes/user');
+
 app.use('/', routes);
 
 // Server Test
