@@ -14,14 +14,27 @@ const connection = mysql.createConnection({
 // View transactions (Recipients)
 exports.view = (req, res) => {
   // User the connection
-  connection.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
+  connection.query('SELECT * FROM recipients WHERE status = "active"', (err, rows) => {
     if (!err) {
-      const removedUser = req.query.removed;
-      res.render('recipients', { rows, removedUser });
+      // const removedRecipient = req.query.removed;
+      res.render('recipients', { rows });
     } else {
       console.log(err);
     }
-    console.log('The data from Recipient table: \n', rows);
+    console.log('The data from recipients table: \n', rows);
+  });
+};
+
+// View Users
+exports.viewall = (req, res) => {
+  // User the connection
+  connection.query('SELECT * FROM recipients WHERE id = ?', [req.params.id], (err, rows) => {
+    if (!err) {
+      res.render('view-user', { rows });
+    } else {
+      console.log(err);
+    }
+    console.log('The data from user table are: \n', rows);
   });
 };
 
@@ -33,12 +46,12 @@ exports.create = (req, res) => {
   // const searchTerm = req.body.search;
 
   // Recipient's connection
-  connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ?', [first_name, last_name, email, phone_number, mobile_money_number, country], (err, rows) => {
+  connection.query('INSERT INTO recipients SET first_name = ?, last_name = ?, email = ?, phone_number = ?, mobile_money_number = ?, country = ?', [first_name, last_name, email, phone_number, mobile_money_number, country], (err, rows) => {
     if (!err) {
       res.render('add-recipient', { alert: 'Recipient added successfully.' });
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    console.log('The data from recipients table: \n', rows);
   });
 };
